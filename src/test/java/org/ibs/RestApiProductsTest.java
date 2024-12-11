@@ -23,6 +23,27 @@ public class RestApiProductsTest {
         );
     }
 
+    @AfterAll
+    static void resetSandBox() {
+        given()
+                .filter(cookieFilter)
+                .basePath("/api/data/reset")
+                .when()
+                .post();
+        reset();
+
+        given()
+                .filter(cookieFilter)
+                .basePath("/api/food")
+                .when()
+                .contentType(ContentType.JSON)
+                .get("")
+                .then()
+                .log().all()
+                .extract()
+                .jsonPath().getList("", ProductDataPojo.class);
+    }
+
     @Test
     @Order(1)
     void addNotExoticVeg() {
@@ -125,27 +146,5 @@ public class RestApiProductsTest {
         Assertions.assertTrue(products.stream().anyMatch(
                 product -> "Манго".equals(product.getName()) && "FRUIT".equals(product.getType())
         ), "Список продуктов должен содержать 'Морковь'");
-    }
-
-    @Test
-    @Order(6)
-    void resetSandBox() {
-        given()
-                .filter(cookieFilter)
-                .basePath("/api/data/reset")
-                .when()
-                .post();
-        reset();
-
-        given()
-                .filter(cookieFilter)
-                .basePath("/api/food")
-                .when()
-                .contentType(ContentType.JSON)
-                .get("")
-                .then()
-                .log().all()
-                .extract()
-                .jsonPath().getList("", ProductDataPojo.class);
     }
 }
