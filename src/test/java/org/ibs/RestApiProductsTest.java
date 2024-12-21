@@ -18,7 +18,7 @@ public class RestApiProductsTest {
     @BeforeAll
     static void setUp() {
         Specifications.installSpecification(
-                Specifications.requestSpecification("http://localhost:8080"),
+                Specifications.requestSpecification("https://qualit.applineselenoid.fvds.ru"),
                 Specifications.responseSpecification(200)
         );
     }
