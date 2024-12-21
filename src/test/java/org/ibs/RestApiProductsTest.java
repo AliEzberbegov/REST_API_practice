@@ -137,14 +137,14 @@ public class RestApiProductsTest {
 
         Assertions.assertTrue(products.stream().anyMatch(
                 product -> "Батат".equals(product.getName()) && "VEGETABLE".equals(product.getType())
-        ), "Список продуктов должен содержать 'Яблоко'");
+        ), "Список продуктов должен содержать 'Батат'");
 
         Assertions.assertTrue(products.stream().anyMatch(
                 product -> "Виноград".equals(product.getName()) && "FRUIT".equals(product.getType())
-        ), "Список продуктов должен содержать экзотический 'Банан'");
+        ), "Список продуктов должен содержать экзотический 'Виноград'");
 
         Assertions.assertTrue(products.stream().anyMatch(
                 product -> "Манго".equals(product.getName()) && "FRUIT".equals(product.getType())
-        ), "Список продуктов должен содержать 'Морковь'");
+        ), "Список продуктов должен содержать 'Манго'");
     }
 }
